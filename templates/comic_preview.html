@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        {{ title }} - ComicCraft
+    </title>
+
+    <link
+        rel="stylesheet"
+        href="/static/css/style.css"
+    >
+
+</head>
+
+<body>
+
+<div class="page-shell wide">
+
+    <header class="hero compact">
+
+        <p class="eyebrow">
+            YOUR GENERATED COMIC
+        </p>
+
+        <h1>
+            {{ title }}
+        </h1>
+
+        <p>
+            Review your five comic panels
+            before exporting the final PDF.
+        </p>
+
+    </header>
+
+
+    <main>
+
+        {% for panel in layout %}
+
+        <article class="panel-card">
+
+            <div class="panel-header">
+
+                <span>
+                    Panel {{ panel.panel_number }}
+                </span>
+
+                <h2>
+                    {{ panel.title }}
+                </h2>
+
+            </div>
+
+
+            <img
+                class="comic-image"
+                src="{{ panel.image_path }}"
+                alt="Comic illustration for {{ panel.title }}"
+            >
+
+
+            <p class="scene">
+
+                <strong>
+                    Scene:
+                </strong>
+
+                <em>
+                    {{ panel.scene_description }}
+                </em>
+
+            </p>
+
+
+            <div class="story-box">
+
+                {% if panel.caption %}
+
+                <p>
+                    <strong>
+                        Caption:
+                    </strong>
+
+                    {{ panel.caption }}
+                </p>
+
+                {% endif %}
+
+
+                {% if panel.narration %}
+
+                <p>
+                    <strong>
+                        Narration:
+                    </strong>
+
+                    {{ panel.narration }}
+                </p>
+
+                {% endif %}
+
+
+                {% if panel.dialogue %}
+
+                <p>
+                    <strong>
+                        Dialogue:
+                    </strong>
+
+                    {{ panel.dialogue }}
+                </p>
+
+                {% endif %}
+
+            </div>
+
+
+            <details>
+
+                <summary>
+                    Show Image Prompt
+                </summary>
+
+                <p>
+                    {{ panel.image_prompt }}
+                </p>
+
+            </details>
+
+        </article>
+
+        {% endfor %}
+
+
+        <section class="actions">
+
+            <a
+                class="button"
+                href="{{ pdf_url }}"
+            >
+                Download Your Comic as PDF
+            </a>
+
+
+            <a
+                class="secondary-button"
+                href="/export-success"
+            >
+                Export Success Page
+            </a>
+
+
+            <a
+                class="secondary-button"
+                href="/"
+            >
+                Create Another Comic
+            </a>
+
+        </section>
+
+    </main>
+
+</div>
+
+</body>
+
+</html>
